@@ -28,7 +28,7 @@ if process_url_clicked:
     try:
         # Load data from URLs
         loader = UnstructuredURLLoader(urls=urls)
-        main_placeholder.text("Data Loading...Started...✅✅✅")
+        main_placeholder.text("Data Loading..")
         data = loader.load()
         
         # Split data into chunks
@@ -36,13 +36,13 @@ if process_url_clicked:
             separators=['\n\n', '\n', '.', ','],
             chunk_size=1000
         )
-        main_placeholder.text("Text Splitter...Started...✅✅✅")
+        main_placeholder.text("Text Splitter..")
         docs = text_splitter.split_documents(data)
         
         # Create embeddings and save to FAISS index
         embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
         vectorstore_openai = FAISS.from_documents(docs, embeddings)
-        main_placeholder.text("Embedding Vector Started Building...✅✅✅")
+        main_placeholder.text("Embedding Vector Started Building..")
         time.sleep(2)
 
         # Save the FAISS index to a pickle file
